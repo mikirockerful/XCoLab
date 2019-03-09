@@ -16,7 +16,6 @@ before_install:
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 - gem install dpl --source http://rubygems.org
 - source scripts/travis/travis_rc.sh
-- chmod 600 deploy_rsa
 - scripts/travis/before_script.sh
 
 addons:
