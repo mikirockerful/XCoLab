@@ -1,9 +1,9 @@
 version: '3'
 services:
 
-  xcolab-view:
+  view-xcolab:
     build: view/
-    image: xcolab-view
+    image: view-xcolab
     network_mode: 'host'
     volumes:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
