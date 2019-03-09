@@ -1,6 +1,23 @@
 #!/bin/bash
 
 if [ $BUILD_TYPE == 'deploy' ]; then
+
+    echo "Building Docker images"
+    docker build -t mikirockerful/activities-service-xcolab microservices/services/activities-service/
+    docker build -t mikirockerful/admin-service-xcolab microservices/services/admin-service/
+    docker build -t mikirockerful/comment-service-xcolab microservices/services/comment-service/
+    docker build -t mikirockerful/content-service-xcolab microservices/services/content-service/
+    docker build -t mikirockerful/contest-service-xcolab microservices/services/contest-service/
+    docker build -t mikirockerful/emails-service-xcolab microservices/services/emails-service/
+    docker build -t mikirockerful/eureka-server-xcolab microservices/cloud/eureka-server/
+    docker build -t mikirockerful/members-service-xcolab microservices/services/members-service/
+    docker build -t mikirockerful/modeling-service-xcolab microservices/services/modeling-service/
+    docker build -t mikirockerful/moderation-service-xcolab microservices/services/moderation-service/
+    docker build -t mikirockerful/search-service-xcolab microservices/services/search-service/
+    docker build -t mikirockerful/tracking-service-xcolab microservices/services/tracking-service/
+    docker build -t mikirockerful/view-xcolab view/
+
+
     echo "Creating binary directories"
     mkdir -p binaries/view
     mkdir -p binaries/cloud
