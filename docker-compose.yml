@@ -5,6 +5,8 @@ services:
     #build: view/
     image: mikirockerful/view-xcolab
     #network_mode: 'host'
+    ports:
+      - "18082:18082"
     networks:
       - internal-network-xcolab
     volumes:
