@@ -1,4 +1,4 @@
-FROM openjdk:8u191-jdk-alpine
+FROM openjdk:8u191-jre-alpine
 
 ADD target/admin-service-1.0-SNAPSHOT.jar admin-service-1.0-SNAPSHOT.jar
 ADD entrypoint.sh /entrypoint.sh

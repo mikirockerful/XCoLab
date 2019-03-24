@@ -1,4 +1,4 @@
-FROM openjdk:8u191-jdk-alpine
+FROM openjdk:8u191-jre-alpine
 
 ADD target/xcolab-view-1.0-SNAPSHOT.war xcolab-view-1.0-SNAPSHOT.war
 ADD entrypoint.sh /entrypoint.sh
