@@ -11,6 +11,10 @@ services:
       - internal-network-xcolab
     volumes:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
+      - '${FILES_UPLOAD_DIR?"Please specify a path for storing uploaded files by setting environment variable FILES_UPLOAD_DIR"}:/var/xcolab-images/'
+    deploy:
+      placement:
+        constraints: [node.role == manager]
 
   eureka-server-xcolab:
     #build: microservices/cloud/eureka-server/
