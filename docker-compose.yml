@@ -8,7 +8,7 @@ services:
     ports:
       - "18082:18082"
     networks:
-      - internal-network-xcolab
+      - xcolab-network
     volumes:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
       - '${FILES_UPLOAD_DIR?"Please specify a path for storing uploaded files by setting environment variable FILES_UPLOAD_DIR"}:/var/xcolab-images/'
@@ -20,7 +20,7 @@ services:
     #build: microservices/cloud/eureka-server/
     image: mikirockerful/eureka-server-xcolab
     networks:
-      internal-network-xcolab:
+      xcolab-network:
         aliases:
           - eureka-server
 
@@ -29,80 +29,80 @@ services:
     #build: microservices/services/activities-service/
     image: mikirockerful/activities-service-xcolab
     networks:
-      - internal-network-xcolab
+      - xcolab-network
     volumes:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
   admin-service-xcolab:
     #build: microservices/services/admin-service/
     image: mikirockerful/admin-service-xcolab
     networks:
-      - internal-network-xcolab
+      - xcolab-network
     volumes:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
   comment-service-xcolab:
     #build: microservices/services/comment-service/
     image: mikirockerful/comment-service-xcolab
     networks:
-      - internal-network-xcolab
+      - xcolab-network
     volumes:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
   content-service-xcolab:
     #build: microservices/services/content-service/
     image: mikirockerful/content-service-xcolab
     networks:
-      - internal-network-xcolab
+      - xcolab-network
     volumes:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
   contest-service-xcolab:
     #build: microservices/services/contest-service/
     image: mikirockerful/contest-service-xcolab
     networks:
-      - internal-network-xcolab
+      - xcolab-network
     volumes:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
   emails-service-xcolab:
     #build: microservices/services/emails-service/
     image: mikirockerful/emails-service-xcolab
     networks:
-      - internal-network-xcolab
+      - xcolab-network
     volumes:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
   members-service-xcolab:
     #build: microservices/services/members-service/
     image: mikirockerful/members-service-xcolab
     networks:
-      - internal-network-xcolab
+      - xcolab-network
     volumes:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
   modeling-service-xcolab:
     #build: microservices/services/modeling-service/
     image: mikirockerful/modeling-service-xcolab
     networks:
-      - internal-network-xcolab
+      - xcolab-network
     volumes:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
   moderation-service-xcolab:
     #build: microservices/services/moderation-service/
     image: mikirockerful/moderation-service-xcolab
     networks:
-      - internal-network-xcolab
+      - xcolab-network
     volumes:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
   search-service-xcolab:
     #build: microservices/services/search-service/
     image: mikirockerful/search-service-xcolab
     networks:
-      - internal-network-xcolab
+      - xcolab-network
     volumes:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
   tracking-service-xcolab:
     #build: microservices/services/tracking-service/
     image: mikirockerful/tracking-service-xcolab
     networks:
-      - internal-network-xcolab
+      - xcolab-network
     volumes:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
 
 networks:
-  internal-network-xcolab:
-    name: internal-network-xcolab
+  xcolab-network:
+    name: xcolab-network
