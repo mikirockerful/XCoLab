@@ -1,6 +1,10 @@
-FROM openjdk:8u191-jre-alpine
+FROM openjdk:8u181-jre-slim
 
-RUN apk add --no-cache mariadb-client=10.3.13-r0
+RUN apt-get update && apt-get install -y \
+    mariadb-client-10.1 \
+    wget
+
+RUN wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/5.2.4/flyway-commandline-5.2.4-linux-x64.tar.gz | tar xvz && ln -s /flyway-5.2.4/flyway /usr/local/bin
 
 ADD target/content-service-1.0-SNAPSHOT.jar content-service-1.0-SNAPSHOT.jar
 ADD entrypoint.sh /entrypoint.sh
