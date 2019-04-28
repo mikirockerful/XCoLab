@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/5.2.4/flyway-commandline-5.2.4-linux-x64.tar.gz | tar xvz && ln -s /flyway-5.2.4/flyway /usr/local/bin
 
+ADD src/main/java/resources/db.migration/
 ADD target/activities-service-1.0-SNAPSHOT.jar activities-service-1.0-SNAPSHOT.jar
 ADD entrypoint.sh /entrypoint.sh
 

@@ -19,6 +19,6 @@ while [[ "$database_accessible" == "0" ]]; do
     fi
 done
 
-JAVA_OPTS="-Dserver.port=18084 -Xmx1G -Xms256M -XX:-OmitStackTraceInFastThrow -Dspring.profiles.active=docker"
+JAVA_OPTS="-Dserver.port=18088 -Xmx1G -Xms256M -XX:-OmitStackTraceInFastThrow -Dspring.profiles.active=docker"
 
-exec java -jar $JAVA_OPTS /activities-service-1.0-SNAPSHOT.jar
+exec java -jar $JAVA_OPTS /contest-service-1.0-SNAPSHOT.jar
