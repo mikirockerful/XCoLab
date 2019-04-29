@@ -6,8 +6,9 @@ RUN apt-get update && apt-get install -y \
 
 RUN wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/5.2.4/flyway-commandline-5.2.4-linux-x64.tar.gz | tar xvz && ln -s /flyway-5.2.4/flyway /usr/local/bin
 
-ADD target/content-service-1.0-SNAPSHOT.jar content-service-1.0-SNAPSHOT.jar
-ADD entrypoint.sh /entrypoint.sh
+COPY src/main/resources/db/migration /flyway-5.2.4/sql/
+COPY target/content-service-1.0-SNAPSHOT.jar content-service-1.0-SNAPSHOT.jar
+COPY entrypoint.sh /entrypoint.sh
 
 EXPOSE 18087
 ENTRYPOINT ["/entrypoint.sh"]
