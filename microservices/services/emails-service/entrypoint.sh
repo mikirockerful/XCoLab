@@ -1,7 +1,5 @@
 #!/bin/sh
 
-statup_delay=60
-
 # Wait for database to be accessible
 database_host=$(grep db\.url\.base /root/.xcolab.application.properties | awk -F '//' '{print $2}' | awk -F ':' '{print $1}')
 database_port=$(grep db\.url\.base /root/.xcolab.application.properties | awk -F '//' '{print $2}' | awk -F ':' '{print $2}')
@@ -20,9 +18,6 @@ while [[ "$database_accessible" == "0" ]]; do
         sleep 1
     fi
 done
-
-echo "Waiting for $startup_delay seconds to prevent simultaneous database migrations"
-sleep $startup_delay
 
 JAVA_OPTS="-Dserver.port=18089 -Xmx1G -Xms256M -XX:-OmitStackTraceInFastThrow -Dspring.profiles.active=docker"
 
