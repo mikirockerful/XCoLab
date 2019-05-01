@@ -143,6 +143,7 @@ services:
       - MYSQL_USER=xcolab
       - MYSQL_PASSWORD=${MYSQL_PASSWORD?"Specify DB password for xcolab user in env MYSQL_PASSWORD"}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD?"Specify DB password for root in env MYSQL_ROOT_PASSWORD"}
+      - MYSQL_ROOT_HOST=127.0.0.1
     networks:
       - xcolab-network
     volumes:
