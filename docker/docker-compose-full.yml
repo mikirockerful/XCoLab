@@ -13,6 +13,17 @@ services:
     restart: on-failure
     depends_on:
       - xcolab_mysql
+      - activities-service-xcolab
+      - admin-service-xcolab
+      - comment-service-xcolab
+      - content-service-xcolab
+      - contest-service-xcolab
+      - emails-service-xcolab
+      - members-service-xcolab
+      - modeling-service-xcolab
+      - moderation-service-xcolab
+      - search-service-xcolab
+      - tracking-service-xcolab
     deploy:
       placement:
         constraints: [node.role == manager]
@@ -152,6 +163,29 @@ services:
     deploy:
       placement:
         constraints: [node.role == manager]
+
+  database-starter-xcolab:
+    image: mikirockerful/mysql_client
+    environment:
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD?"Specify DB password for xcolab user in env MYSQL_PASSWORD"}
+    volumes:
+      - '../sql/starter/xcolab-data.sql:/xcolab-data.sql'
+    command: sh -c "sleep 300 && mysql -h xcolab_mysql -u xcolab --password=$MYSQL_PASSWORD xcolab < /xcolab-data.sql"
+    networks:
+      - xcolab-network
+    depends_on:
+      - xcolab_mysql
+      - activities-service-xcolab
+      - admin-service-xcolab
+      - comment-service-xcolab
+      - content-service-xcolab
+      - contest-service-xcolab
+      - emails-service-xcolab
+      - members-service-xcolab
+      - modeling-service-xcolab
+      - moderation-service-xcolab
+      - search-service-xcolab
+      - tracking-service-xcolab
 
 networks:
   xcolab-network:
