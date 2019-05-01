@@ -1,0 +1,146 @@
+version: '3.5'
+services:
+
+  view-xcolab:
+    image: mikirockerful/view-xcolab
+    ports:
+      - "18082:18082"
+    networks:
+      - xcolab-network
+    volumes:
+      - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
+      - '${FILES_UPLOAD_DIR?"Specify a path for user uploaded files in env variable FILES_UPLOAD_DIR"}:/var/xcolab-images/'
+    restart: on-failure
+    depends_on:
+      - xcolab_mysql
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+  eureka-server-xcolab:
+    image: mikirockerful/eureka-server-xcolab
+    networks:
+      xcolab-network:
+        aliases:
+          - eureka-server
+
+
+  activities-service-xcolab:
+    image: mikirockerful/activities-service-xcolab
+    networks:
+      - xcolab-network
+    volumes:
+      - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
+    restart: on-failure
+    depends_on:
+      - xcolab_mysql
+  admin-service-xcolab:
+    image: mikirockerful/admin-service-xcolab
+    networks:
+      - xcolab-network
+    volumes:
+      - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
+    restart: on-failure
+    depends_on:
+      - xcolab_mysql
+  comment-service-xcolab:
+    image: mikirockerful/comment-service-xcolab
+    networks:
+      - xcolab-network
+    volumes:
+      - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
+    restart: on-failure
+    depends_on:
+      - xcolab_mysql
+  content-service-xcolab:
+    image: mikirockerful/content-service-xcolab
+    networks:
+      - xcolab-network
+    volumes:
+      - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
+    restart: on-failure
+    depends_on:
+      - xcolab_mysql
+  contest-service-xcolab:
+    image: mikirockerful/contest-service-xcolab
+    networks:
+      - xcolab-network
+    volumes:
+      - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
+    restart: on-failure
+    depends_on:
+      - xcolab_mysql
+  emails-service-xcolab:
+    image: mikirockerful/emails-service-xcolab
+    networks:
+      - xcolab-network
+    volumes:
+      - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
+    restart: on-failure
+    depends_on:
+      - xcolab_mysql
+  members-service-xcolab:
+    image: mikirockerful/members-service-xcolab
+    networks:
+      - xcolab-network
+    volumes:
+      - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
+    restart: on-failure
+    depends_on:
+      - xcolab_mysql
+  modeling-service-xcolab:
+    image: mikirockerful/modeling-service-xcolab
+    networks:
+      - xcolab-network
+    volumes:
+      - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
+    restart: on-failure
+    depends_on:
+      - xcolab_mysql
+  moderation-service-xcolab:
+    image: mikirockerful/moderation-service-xcolab
+    networks:
+      - xcolab-network
+    volumes:
+      - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
+    restart: on-failure
+    depends_on:
+      - xcolab_mysql
+  search-service-xcolab:
+    image: mikirockerful/search-service-xcolab
+    networks:
+      - xcolab-network
+    volumes:
+      - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
+    restart: on-failure
+    depends_on:
+      - xcolab_mysql
+  tracking-service-xcolab:
+    image: mikirockerful/tracking-service-xcolab
+    networks:
+      - xcolab-network
+    volumes:
+      - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
+    restart: on-failure
+    depends_on:
+      - xcolab_mysql
+
+  xcolab_mysql:
+    image: mysql/mysql-server:5.7
+    environment:
+      - MYSQL_DATABASE=xcolab
+      - MYSQL_USER=xcolab
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD?"Specify DB password for xcolab user in env MYSQL_PASSWORD"}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD?"Specify DB password for root in env MYSQL_ROOT_PASSWORD"}
+    networks:
+      - xcolab-network
+    volumes:
+      - './mysql_config:/etc/mysql'
+      - '${DATABASE_PATH?"Specify DATABASE_PATH"}:/var/lib/mysql'
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+networks:
+  xcolab-network:
+    name: xcolab-network
