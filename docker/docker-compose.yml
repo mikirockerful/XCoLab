@@ -33,7 +33,6 @@ services:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
     restart: on-failure
     depends_on:
-      - xcolab_mysql
       - eureka-server-xcolab
   admin-service-xcolab:
     image: mikirockerful/admin-service-xcolab
@@ -43,7 +42,6 @@ services:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
     restart: on-failure
     depends_on:
-      - xcolab_mysql
       - eureka-server-xcolab
   comment-service-xcolab:
     image: mikirockerful/comment-service-xcolab
@@ -53,7 +51,6 @@ services:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
     restart: on-failure
     depends_on:
-      - xcolab_mysql
       - eureka-server-xcolab
   content-service-xcolab:
     image: mikirockerful/content-service-xcolab
@@ -63,7 +60,6 @@ services:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
     restart: on-failure
     depends_on:
-      - xcolab_mysql
       - eureka-server-xcolab
   contest-service-xcolab:
     image: mikirockerful/contest-service-xcolab
@@ -73,7 +69,6 @@ services:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
     restart: on-failure
     depends_on:
-      - xcolab_mysql
       - eureka-server-xcolab
   emails-service-xcolab:
     image: mikirockerful/emails-service-xcolab
@@ -83,7 +78,6 @@ services:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
     restart: on-failure
     depends_on:
-      - xcolab_mysql
       - eureka-server-xcolab
   members-service-xcolab:
     image: mikirockerful/members-service-xcolab
@@ -93,7 +87,6 @@ services:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
     restart: on-failure
     depends_on:
-      - xcolab_mysql
       - eureka-server-xcolab
   modeling-service-xcolab:
     image: mikirockerful/modeling-service-xcolab
@@ -103,7 +96,6 @@ services:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
     restart: on-failure
     depends_on:
-      - xcolab_mysql
       - eureka-server-xcolab
   moderation-service-xcolab:
     image: mikirockerful/moderation-service-xcolab
@@ -113,7 +105,6 @@ services:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
     restart: on-failure
     depends_on:
-      - xcolab_mysql
       - eureka-server-xcolab
   search-service-xcolab:
     image: mikirockerful/search-service-xcolab
@@ -123,7 +114,6 @@ services:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
     restart: on-failure
     depends_on:
-      - xcolab_mysql
       - eureka-server-xcolab
   tracking-service-xcolab:
     image: mikirockerful/tracking-service-xcolab
@@ -133,24 +123,7 @@ services:
       - '~/.xcolab.application.properties:/root/.xcolab.application.properties'
     restart: on-failure
     depends_on:
-      - xcolab_mysql
       - eureka-server-xcolab
-
-  xcolab_mysql:
-    image: mysql/mysql-server:5.7
-    environment:
-      - MYSQL_DATABASE=xcolab
-      - MYSQL_USER=xcolab
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD?"Specify DB password for xcolab user in env MYSQL_PASSWORD"}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD?"Specify DB password for root in env MYSQL_ROOT_PASSWORD"}
-    networks:
-      - xcolab-network
-    volumes:
-      - './mysql/mysql_config:/etc/mysql'
-      - '${DATABASE_PATH?"Specify DATABASE_PATH"}:/var/lib/mysql'
-    deploy:
-      placement:
-        constraints: [node.role == manager]
 
 networks:
   xcolab-network:
