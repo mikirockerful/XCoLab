@@ -3,8 +3,6 @@ services:
 
   view-xcolab:
     image: mikirockerful/view-xcolab
-    ports:
-      - "18082:18082"
     networks:
       - xcolab-network
     volumes:
@@ -186,6 +184,19 @@ services:
       - moderation-service-xcolab
       - search-service-xcolab
       - tracking-service-xcolab
+
+  apache-xcolab:
+    build: ./apache
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - xcolab-network
+    depends_on:
+      - view-xcolab
+    deploy:
+      placement:
+        constraints: [node.role == manager]
 
 networks:
   xcolab-network:
