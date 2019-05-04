@@ -184,7 +184,10 @@ services:
       - moderation-service-xcolab
       - search-service-xcolab
       - tracking-service-xcolab
-
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+        
   apache-xcolab:
     image: mikirockerful/httpd-ssl-proxy-xcolab
     ports:
