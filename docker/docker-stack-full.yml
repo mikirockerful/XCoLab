@@ -186,7 +186,7 @@ services:
       - tracking-service-xcolab
 
   apache-xcolab:
-    build: ./apache
+    image: mikirockerful/httpd-ssl-proxy-xcolab
     ports:
       - "80:80"
       - "443:443"
