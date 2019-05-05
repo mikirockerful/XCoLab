@@ -184,6 +184,8 @@ services:
       - moderation-service-xcolab
       - search-service-xcolab
       - tracking-service-xcolab
+    restart_policy:
+      condition: none
 
   apache-xcolab:
     build: ./apache

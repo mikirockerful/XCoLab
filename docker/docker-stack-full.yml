@@ -187,7 +187,9 @@ services:
     deploy:
       placement:
         constraints: [node.role == manager]
-        
+    restart_policy:
+      condition: none
+
   apache-xcolab:
     image: mikirockerful/httpd-ssl-proxy-xcolab
     ports:
